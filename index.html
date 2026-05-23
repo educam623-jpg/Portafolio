@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camilo Hurtado — Diseño Gráfico & Identidad Visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--ink:#0d0d0d;
+--paper:#faf8f4;
+--warm:#f5f0e8;
+--gold:#b8965a;
+--gold-light:#d4b07a;
+--gold-dark:#8a6e3e;
+--muted:#6b6560;
+--border:rgba(184,150,90,0.2);
+--card:#ffffff;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,opacity .2s}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease;opacity:.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.5rem 5%;display:flex;justify-content:space-between;align-items:center;background:rgba(250,248,244,0.92);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border)}
+.logo{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--ink);letter-spacing:1px}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem}
+.nav-links a{font-size:.85rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;transition:.3s;text-transform:uppercase}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{background:var(--ink);color:var(--paper)!important;padding:.55rem 1.4rem;border-radius:2px;letter-spacing:.1em!important;transition:background .3s!important}
+.nav-cta:hover{background:var(--gold)!important;color:var(--ink)!important}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;gap:0;padding-top:80px}
+.hero-left{padding:8% 5% 8% 8%;display:flex;flex-direction:column;justify-content:center;position:relative}
+.hero-left::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:0.5px;background:var(--border)}
+.hero-eyebrow{font-size:.78rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:.75rem}
+.hero-eyebrow::before{content:'';width:2.5rem;height:1px;background:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,5vw,5.5rem);line-height:1.05;font-weight:700;margin-bottom:1.5rem;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.75;max-width:420px;margin-bottom:3rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;align-items:center}
+.btn-primary{background:var(--ink);color:var(--paper);padding:.9rem 2.2rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;transition:background .3s,transform .2s}
+.btn-primary:hover{background:var(--gold);transform:translateY(-2px)}
+.btn-ghost{color:var(--ink);font-size:.85rem;text-decoration:none;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:.5rem;transition:gap .3s,color .3s}
+.btn-ghost:hover{gap:.9rem;color:var(--gold)}
+.hero-right{background:var(--warm);display:flex;flex-direction:column;justify-content:flex-end;padding:6% 8% 8%;position:relative;overflow:hidden}
+.hero-visual{position:absolute;top:8%;right:-5%;width:85%;aspect-ratio:3/4;background:var(--ink);border-radius:2px;overflow:hidden}
+.hero-visual-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+.hero-mono{font-family:'Playfair Display',serif;font-size:6rem;color:rgba(255,255,255,.04);font-weight:700;line-height:1;user-select:none}
+.hero-portrait-label{position:absolute;bottom:2rem;left:2rem;right:2rem}
+.hero-portrait-label h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--paper);font-style:italic;margin-bottom:.25rem}
+.hero-portrait-label p{font-size:.75rem;color:rgba(250,248,244,.5);letter-spacing:.15em;text-transform:uppercase}
+.hero-stats{display:flex;gap:3rem;position:relative;z-index:2;margin-top:auto}
+.hero-stat span{font-size:2rem;font-family:'Playfair Display',serif;font-weight:700;color:var(--ink);display:block}
+.hero-stat p{font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:.1rem}
+.scroll-indicator{position:absolute;bottom:2.5rem;left:8%;display:flex;align-items:center;gap:.75rem;font-size:.72rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase;animation:bob 2s ease-in-out infinite}
+.scroll-line{width:3rem;height:1px;background:var(--gold)}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* MARQUEE */
+.marquee-strip{background:var(--ink);padding:.85rem 0;overflow:hidden;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border)}
+.marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite}
+.marquee-item{white-space:nowrap;font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(250,248,244,.4);padding:0 3rem}
+.marquee-item.accent{color:var(--gold)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:7rem 8%}
+.section-label{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem}
+.section-label::before{content:'';width:2rem;height:1px;background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);line-height:1.15;margin-bottom:1.5rem;letter-spacing:-.02em}
+.section-title em{font-style:italic;color:var(--gold)}
+
+/* ABOUT */
+.about{background:var(--warm)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:start;margin-top:4rem}
+.about-text p{color:var(--muted);line-height:1.9;margin-bottom:1.5rem;font-size:1.05rem;font-weight:300}
+.about-text p strong{color:var(--ink);font-weight:500}
+.about-skills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+.skill-tag{background:var(--paper);border:0.5px solid var(--border);padding:.45rem 1rem;font-size:.78rem;letter-spacing:.08em;color:var(--ink);border-radius:1px;transition:background .3s,color .3s,border-color .3s}
+.skill-tag:hover{background:var(--gold);color:var(--paper);border-color:var(--gold)}
+.about-right h3{font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:2rem;font-style:italic}
+.about-tools{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.tool-item{background:var(--warm);padding:1.2rem 1.5rem}
+.tool-item strong{display:block;font-size:.85rem;font-weight:500;margin-bottom:.2rem}
+.tool-item span{font-size:.75rem;color:var(--muted)}
+.tool-bar{height:2px;background:var(--border);margin-top:.75rem;border-radius:1px;overflow:hidden}
+.tool-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dark));border-radius:1px}
+
+/* PORTFOLIO */
+.portfolio{background:var(--paper)}
+.portfolio-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+.filters{display:flex;gap:.5rem}
+.filter{background:transparent;border:0.5px solid var(--border);padding:.45rem 1.1rem;font-size:.78rem;letter-spacing:.08em;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:.3s;border-radius:1px}
+.filter.active,.filter:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.portfolio-grid .featured{grid-column:span 2}
+.project-card{background:var(--card);overflow:hidden;position:relative;cursor:none;group:true}
+.project-thumb{aspect-ratio:4/3;position:relative;overflow:hidden}
+.featured .project-thumb{aspect-ratio:16/9}
+.project-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:transform .6s ease}
+.project-card:hover .project-bg{transform:scale(1.05)}
+.project-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.7) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.project-card:hover .project-overlay{opacity:1}
+.project-meta{padding:1.4rem 1.6rem}
+.project-cat{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.project-name{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:.5rem;font-style:italic}
+.project-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+.project-arrow{position:absolute;top:1.2rem;right:1.2rem;width:36px;height:36px;background:var(--paper);display:flex;align-items:center;justify-content:center;border-radius:50%;opacity:0;transition:opacity .3s,transform .3s;font-size:1rem;transform:translate(4px,-4px)}
+.project-card:hover .project-arrow{opacity:1;transform:translate(0,0)}
+
+/* SERVICES */
+.services{background:var(--ink)}
+.services .section-label{color:var(--gold)}
+.services .section-title{color:var(--paper)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06);margin-top:4rem}
+.service-item{background:var(--ink);padding:3rem 2.5rem;border-top:2px solid transparent;transition:border-color .3s}
+.service-item:hover{border-color:var(--gold)}
+.service-num{font-family:'Playfair Display',serif;font-size:4rem;color:rgba(255,255,255,.06);font-weight:700;margin-bottom:1.5rem;line-height:1}
+.service-name{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--paper);margin-bottom:1rem;font-style:italic}
+.service-desc{font-size:.85rem;color:rgba(250,248,244,.45);line-height:1.8;margin-bottom:2rem;font-weight:300}
+.service-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.service-tag{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);border:0.5px solid rgba(184,150,90,.25);padding:.3rem .75rem}
+
+/* PROCESS */
+.process{background:var(--warm)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:4rem;position:relative}
+.process-steps::before{content:'';position:absolute;top:2.2rem;left:10%;right:10%;height:1px;background:var(--border)}
+.process-step{padding:2rem 1.5rem;text-align:center}
+.step-num{width:4.4rem;height:4.4rem;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);position:relative;z-index:1;background:var(--warm);transition:background .3s,color .3s}
+.process-step:hover .step-num{background:var(--gold);color:var(--paper)}
+.step-title{font-weight:500;font-size:.9rem;margin-bottom:.5rem;letter-spacing:.05em}
+.step-desc{font-size:.8rem;color:var(--muted);line-height:1.65}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--paper)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.testimonial-card{background:var(--warm);padding:2rem 2.2rem;border-left:2px solid var(--gold);position:relative}
+.testimonial-quote{font-family:'Playfair Display',serif;font-size:3rem;color:var(--gold);opacity:.3;line-height:1;margin-bottom:.5rem}
+.testimonial-text{font-size:.92rem;color:var(--ink);line-height:1.8;margin-bottom:1.5rem;font-style:italic;font-weight:300}
+.testimonial-author strong{font-size:.85rem;font-weight:500;display:block}
+.testimonial-author span{font-size:.75rem;color:var(--muted);letter-spacing:.08em}
+
+/* CONTACT */
+.contact{background:var(--warm)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:8rem;margin-top:4rem;align-items:start}
+.contact-info p{color:var(--muted);line-height:1.8;margin-bottom:2.5rem;font-weight:300}
+.contact-links{display:flex;flex-direction:column;gap:1rem}
+.contact-link{display:flex;align-items:center;gap:1rem;text-decoration:none;color:var(--ink);font-size:.9rem;transition:gap .3s,color .3s;padding:.6rem 0;border-bottom:0.5px solid var(--border)}
+.contact-link:hover{gap:1.4rem;color:var(--gold)}
+.contact-link-icon{width:2.2rem;height:2.2rem;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.contact-form-wrap{}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.85rem 1rem;background:var(--paper);border:0.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:.95rem;color:var(--ink);outline:none;transition:border-color .3s;resize:vertical;border-radius:1px;-webkit-appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold)}
+.form-group textarea{min-height:130px}
+.form-group select option{background:var(--paper)}
+.form-submit{width:100%;background:var(--ink);color:var(--paper);border:none;padding:1.1rem;font-family:'DM Sans',sans-serif;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .3s;margin-top:.5rem}
+.form-submit:hover{background:var(--gold)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:3rem 8%;display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid rgba(255,255,255,.05)}
+.footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--paper)}
+.footer-logo span{color:var(--gold)}
+.footer-copy{font-size:.75rem;color:rgba(250,248,244,.3);letter-spacing:.08em}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.75rem;color:rgba(250,248,244,.4);text-decoration:none;letter-spacing:.08em;transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+.hero{grid-template-columns:1fr;min-height:auto}
+.hero-right{display:none}
+.hero-left{padding:8rem 6% 5rem}
+.about-grid,.contact-grid,.portfolio-grid,.services-grid,.process-steps,.testimonials-grid{grid-template-columns:1fr}
+.portfolio-grid .featured{grid-column:span 1}
+.portfolio-header{flex-direction:column;align-items:flex-start;gap:1.5rem}
+.nav-links{display:none}
+.form-row{grid-template-columns:1fr}
+footer{flex-direction:column;gap:1.5rem;text-align:center}
+.footer-links{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <div class="logo">Camilo <span>Hurtado</span></div>
+  <div class="nav-links">
+    <a href="#about">Sobre mí</a>
+    <a href="#portfolio">Portafolio</a>
+    <a href="#services">Servicios</a>
+    <a href="#contact" class="nav-cta">Contacto</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Diseñador Gráfico</p>
+    <h1>Identidades que <em>comunican</em> con alma</h1>
+    <p class="hero-sub">Creo marcas que conectan emocionalmente con su audiencia. Especializado en identidad visual para marcas, restaurantes e influencers con estética y estrategia.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">Ver portafolio</a>
+      <a href="#contact" class="btn-ghost">Hablemos <span>→</span></a>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-line"></span>
+      <span>Scroll</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="hero-mono">CH</div>
+        <div class="hero-mono" style="font-size:3rem;opacity:.5">DESIGN</div>
+      </div>
+      <div class="hero-portrait-label">
+        <h3>Camilo Hurtado</h3>
+        <p>Colombia · Diseño Gráfico · +2 años</p>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span>30+</span><p>Proyectos</p></div>
+      <div class="hero-stat"><span>2</span><p>Años exp.</p></div>
+      <div class="hero-stat"><span>90%</span><p>Clientes repiten</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">Identidad Visual</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Branding Gastronómico</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Contenido para Redes</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Estrategia de Marca</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Diseño Editorial</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Flyers & Presentaciones</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Identidad Visual</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Branding Gastronómico</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Contenido para Redes</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Estrategia de Marca</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Diseño Editorial</span>
+    <span class="marquee-item accent">✦</span>
+    <span class="marquee-item">Flyers & Presentaciones</span>
+    <span class="marquee-item accent">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <p class="section-label fade-up">Sobre mí</p>
+  <h2 class="section-title fade-up">Donde la <em>estética</em> se<br>encuentra con la estrategia</h2>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>Soy Camilo Hurtado, diseñador gráfico con <strong>más de 2 años</strong> creando identidades visuales desde Colombia para el mundo. Me apasiona construir marcas que trasciendan lo visual y se conviertan en experiencias memorables.</p>
+      <p>Mi enfoque combina <strong>intuición estética</strong> con pensamiento estratégico. No diseño solo para que se vea bien, diseño para que <strong>funcione</strong> — para que atraiga al cliente correcto, cuente la historia verdadera y diferencie a mi cliente de su competencia.</p>
+      <p>He trabajado con marcas personales de influencers en Colombia, México y España; identidades para restaurantes de autor y gastro-bares; y campañas de branding para empresas en crecimiento que buscan posicionarse con fuerza.</p>
+      <div class="about-skills">
+        <span class="skill-tag">Identidad Visual</span>
+        <span class="skill-tag">Branding</span>
+        <span class="skill-tag">UI / Web Design</span>
+        <span class="skill-tag">Motion Graphics</span>
+        <span class="skill-tag">Packaging</span>
+        <span class="skill-tag">Social Media</span>
+      </div>
+    </div>
+    <div class="about-right fade-up">
+      <h3>Herramientas & dominio</h3>
+      <div class="about-tools">
+        <div class="tool-item">
+          <strong>Adobe Illustrator</strong>
+          <span>Identidad & vectores</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:97%"></div></div>
+        </div>
+        <div class="tool-item">
+          <strong>Adobe Photoshop</strong>
+          <span>Retoque & composición</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:92%"></div></div>
+        </div>
+        <div class="tool-item">
+          <strong>Figma</strong>
+          <span>UI / UX & prototipado</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:88%"></div></div>
+        </div>
+        <div class="tool-item">
+          <strong>After Effects</strong>
+          <span>Animación & motion</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:82%"></div></div>
+        </div>
+        <div class="tool-item">
+          <strong>InDesign</strong>
+          <span>Editorial & print</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:90%"></div></div>
+        </div>
+        <div class="tool-item">
+          <strong>Lightroom</strong>
+          <span>Edición fotográfica</span>
+          <div class="tool-bar"><div class="tool-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <div>
+      <p class="section-label fade-up">Portafolio</p>
+      <h2 class="section-title fade-up">Proyectos <em>seleccionados</em></h2>
+    </div>
+    <div class="filters fade-up">
+      <button class="filter active" onclick="filterProjects('all',this)">Todos</button>
+      <button class="filter" onclick="filterProjects('marca',this)">Marcas</button>
+      <button class="filter" onclick="filterProjects('influencer',this)">Influencers</button>
+      <button class="filter" onclick="filterProjects('restaurante',this)">Restaurantes</button>
+    </div>
+  </div>
+  <div class="portfolio-grid" id="portfolioGrid">
+
+    <!-- 1. FLYER MENÚ - FEATURED (restaurante) -->
+    <div class="project-card featured" data-cat="restaurante">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(135deg,#1a0f06 0%,#2e1a08 60%,#1a0f06 100%)">
+          <svg width="560" height="260" viewBox="0 0 560 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Flyer de menú tipo carta restaurante -->
+            <rect x="60" y="18" width="200" height="224" rx="2" fill="#110a04" stroke="#b8965a" stroke-width="0.8" opacity=".8"/>
+            <rect x="68" y="26" width="184" height="208" rx="1" fill="none" stroke="#b8965a" stroke-width="0.3" opacity=".4"/>
+            <text x="160" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#d4b07a" font-style="italic" letter-spacing="3">Sazón</text>
+            <line x1="90" y1="62" x2="230" y2="62" stroke="#b8965a" stroke-width="0.5" opacity=".5"/>
+            <text x="160" y="74" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#8a6e3e" letter-spacing="5">MENÚ DE TEMPORADA</text>
+            <text x="90" y="92" font-family="Georgia,serif" font-size="6.5" fill="#b8965a" letter-spacing="2">ENTRADAS</text>
+            <line x1="90" y1="96" x2="232" y2="96" stroke="#b8965a" stroke-width="0.3" opacity=".3"/>
+            <text x="90" y="108" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Ceviche de camarón al coco</text>
+            <text x="230" y="108" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$32.000</text>
+            <text x="90" y="119" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Carpaccio de res con trufas</text>
+            <text x="230" y="119" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$38.000</text>
+            <text x="90" y="130" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Crema de ahuyama tostada</text>
+            <text x="230" y="130" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$24.000</text>
+            <text x="90" y="145" font-family="Georgia,serif" font-size="6.5" fill="#b8965a" letter-spacing="2">PRINCIPALES</text>
+            <line x1="90" y1="149" x2="232" y2="149" stroke="#b8965a" stroke-width="0.3" opacity=".3"/>
+            <text x="90" y="161" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Lomo al vino tinto con papas</text>
+            <text x="230" y="161" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$58.000</text>
+            <text x="90" y="172" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Pechuga de pato con mango</text>
+            <text x="230" y="172" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$62.000</text>
+            <text x="90" y="183" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Risotto de hongos silvestres</text>
+            <text x="230" y="183" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$48.000</text>
+            <text x="90" y="198" font-family="Georgia,serif" font-size="6.5" fill="#b8965a" letter-spacing="2">POSTRES</text>
+            <line x1="90" y1="202" x2="232" y2="202" stroke="#b8965a" stroke-width="0.3" opacity=".3"/>
+            <text x="90" y="214" font-family="Georgia,serif" font-size="6" fill="#d4c4a0">Crème brûlée de maracuyá</text>
+            <text x="230" y="214" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#b8965a">$22.000</text>
+            <text x="160" y="231" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="#6a5030" letter-spacing="3">COCINA DE AUTOR · BOGOTÁ</text>
+            <!-- Panel derecho decorativo -->
+            <rect x="290" y="18" width="210" height="224" rx="2" fill="#1e1106" stroke="#b8965a" stroke-width="0.5" opacity=".5"/>
+            <ellipse cx="395" cy="90" rx="55" ry="55" fill="none" stroke="#b8965a" stroke-width="0.5" opacity=".2"/>
+            <ellipse cx="395" cy="90" rx="40" ry="40" fill="rgba(184,150,90,.06)"/>
+            <text x="395" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="#c9a050" font-style="italic" opacity=".9">Sazón</text>
+            <text x="395" y="100" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#8a6e3e" letter-spacing="5">RESTAURANTE</text>
+            <line x1="330" y1="150" x2="460" y2="150" stroke="#b8965a" stroke-width="0.5" opacity=".3"/>
+            <text x="395" y="168" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#8a6e3e" letter-spacing="2">Calle 93 #12-35 · Reservas:</text>
+            <text x="395" y="180" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#b8965a">+57 300 000 0000</text>
+            <text x="395" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="#6a5030" letter-spacing="3">@sazonrestaurante</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Restaurante · Flyer de Menú</p>
+        <h3 class="project-name">Sazón — Carta de Temporada</h3>
+        <p class="project-desc">Diseño de menú editorial para restaurante de autor en Bogotá. Versión impresa y digital con carta de entradas, platos principales y postres.</p>
+      </div>
+    </div>
+
+    <!-- 2. BRANDING COMPLETO - Influencer -->
+    <div class="project-card" data-cat="influencer">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(160deg,#0d0d1a 0%,#1a1040 100%)">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Branding board influencer: logo + paleta + tipografía -->
+            <rect x="10" y="10" width="200" height="80" rx="2" fill="#16143a" stroke="#c9a962" stroke-width="0.5" opacity=".4"/>
+            <circle cx="55" cy="50" r="22" fill="none" stroke="#c9a962" stroke-width="1" opacity=".5"/>
+            <text x="55" y="47" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#c9a962" letter-spacing="1">VR</text>
+            <text x="55" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="rgba(201,169,98,.4)" letter-spacing="2">LIFESTYLE</text>
+            <text x="90" y="38" font-family="Georgia,serif" font-size="14" fill="#e8d4a0" font-style="italic">Valentina</text>
+            <text x="90" y="52" font-family="Georgia,serif" font-size="6" fill="rgba(201,169,98,.5)" letter-spacing="3">RÍOS</text>
+            <text x="90" y="66" font-family="Georgia,serif" font-size="5" fill="rgba(201,169,98,.3)" letter-spacing="2">CONTENT CREATOR</text>
+            <!-- Paleta colores -->
+            <rect x="10" y="100" width="200" height="34" rx="2" fill="#16143a" stroke="#c9a962" stroke-width="0.5" opacity=".3"/>
+            <text x="18" y="114" font-family="Georgia,serif" font-size="5" fill="rgba(201,169,98,.4)" letter-spacing="2">PALETA</text>
+            <rect x="18" y="118" width="22" height="10" rx="1" fill="#16143a" stroke="#e8d4a0" stroke-width="0.5"/>
+            <rect x="44" y="118" width="22" height="10" rx="1" fill="#c9a962"/>
+            <rect x="70" y="118" width="22" height="10" rx="1" fill="#e8d4a0"/>
+            <rect x="96" y="118" width="22" height="10" rx="1" fill="#f5f0e0"/>
+            <rect x="122" y="118" width="22" height="10" rx="1" fill="#8a7040"/>
+            <!-- Tipografía -->
+            <rect x="10" y="144" width="200" height="46" rx="2" fill="#16143a" stroke="#c9a962" stroke-width="0.5" opacity=".3"/>
+            <text x="18" y="158" font-family="Georgia,serif" font-size="5" fill="rgba(201,169,98,.4)" letter-spacing="2">TIPOGRAFÍA</text>
+            <text x="18" y="172" font-family="Georgia,serif" font-size="11" fill="#e8d4a0" font-style="italic">Playfair Display</text>
+            <text x="18" y="183" font-family="'Courier New'" font-size="7" fill="rgba(201,169,98,.5)" letter-spacing="1">DM Sans — cuerpo</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Influencer · Branding Completo</p>
+        <h3 class="project-name">Valentina Ríos — Brand Board</h3>
+        <p class="project-desc">Sistema de identidad completo: logotipo, paleta cromática, tipografías, templates para stories y feed, y kit de medios para patrocinadores.</p>
+      </div>
+    </div>
+
+    <!-- 3. PRESENTACIÓN CORPORATIVA - Marca -->
+    <div class="project-card" data-cat="marca">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:#08080f">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Slides de presentación corporativa -->
+            <!-- Slide portada -->
+            <rect x="10" y="15" width="120" height="72" rx="2" fill="#0d1220" stroke="#4a9eff" stroke-width="0.5" opacity=".5"/>
+            <rect x="10" y="15" width="120" height="18" rx="2" fill="#1a2540"/>
+            <text x="70" y="27" text-anchor="middle" font-family="'Courier New'" font-size="7" fill="#4a9eff" letter-spacing="2">VEXA STUDIO</text>
+            <text x="22" y="52" font-family="Georgia,serif" font-size="9" fill="#e0e8ff" font-style="italic">Propuesta</text>
+            <text x="22" y="63" font-family="Georgia,serif" font-size="9" fill="#e0e8ff" font-style="italic">Creativa</text>
+            <text x="22" y="75" font-family="'Courier New'" font-size="5" fill="rgba(74,158,255,.5)" letter-spacing="2">2024 — Q1</text>
+            <text x="118" y="83" text-anchor="end" font-family="'Courier New'" font-size="4" fill="rgba(74,158,255,.3)">01</text>
+            <!-- Slide con gráfico -->
+            <rect x="140" y="15" width="70" height="42" rx="2" fill="#0d1220" stroke="#4a9eff" stroke-width="0.5" opacity=".4"/>
+            <text x="175" y="27" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="rgba(74,158,255,.5)" letter-spacing="1">RESULTADOS</text>
+            <rect x="150" y="32" width="8" height="18" rx="1" fill="#1a3a6a"/>
+            <rect x="162" y="26" width="8" height="24" rx="1" fill="#4a9eff" opacity=".7"/>
+            <rect x="174" y="30" width="8" height="20" rx="1" fill="#1a3a6a"/>
+            <rect x="186" y="24" width="8" height="26" rx="1" fill="#4a9eff" opacity=".9"/>
+            <!-- Slide equipo -->
+            <rect x="140" y="62" width="70" height="42" rx="2" fill="#0d1220" stroke="#4a9eff" stroke-width="0.5" opacity=".4"/>
+            <text x="175" y="74" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="rgba(74,158,255,.5)" letter-spacing="1">EQUIPO</text>
+            <circle cx="157" cy="88" r="7" fill="#1a2540" stroke="#4a9eff" stroke-width="0.5" opacity=".6"/>
+            <circle cx="175" cy="88" r="7" fill="#1a2540" stroke="#4a9eff" stroke-width="0.5" opacity=".6"/>
+            <circle cx="193" cy="88" r="7" fill="#1a2540" stroke="#4a9eff" stroke-width="0.5" opacity=".6"/>
+            <text x="157" y="91" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="#4a9eff">CE</text>
+            <text x="175" y="91" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="#4a9eff">DG</text>
+            <text x="193" y="91" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="#4a9eff">MK</text>
+            <text x="157" y="100" text-anchor="middle" font-family="'Courier New'" font-size="3.5" fill="rgba(74,158,255,.35)">CEO</text>
+            <text x="175" y="100" text-anchor="middle" font-family="'Courier New'" font-size="3.5" fill="rgba(74,158,255,.35)">DISEÑO</text>
+            <text x="193" y="100" text-anchor="middle" font-family="'Courier New'" font-size="3.5" fill="rgba(74,158,255,.35)">MKT</text>
+            <!-- Slide servicios -->
+            <rect x="10" y="100" width="120" height="70" rx="2" fill="#0d1220" stroke="#4a9eff" stroke-width="0.5" opacity=".4"/>
+            <text x="70" y="113" text-anchor="middle" font-family="'Courier New'" font-size="5" fill="rgba(74,158,255,.5)" letter-spacing="1">NUESTROS SERVICIOS</text>
+            <rect x="20" y="120" width="45" height="14" rx="1" fill="#1a2540" stroke="#4a9eff" stroke-width="0.3" opacity=".5"/>
+            <text x="42" y="130" text-anchor="middle" font-family="'Courier New'" font-size="4" fill="#4a9eff">Branding</text>
+            <rect x="73" y="120" width="45" height="14" rx="1" fill="#1a2540" stroke="#4a9eff" stroke-width="0.3" opacity=".5"/>
+            <text x="95" y="130" text-anchor="middle" font-family="'Courier New'" font-size="4" fill="#4a9eff">UI / UX</text>
+            <rect x="20" y="140" width="45" height="14" rx="1" fill="#1a2540" stroke="#4a9eff" stroke-width="0.3" opacity=".5"/>
+            <text x="42" y="150" text-anchor="middle" font-family="'Courier New'" font-size="4" fill="#4a9eff">Motion</text>
+            <rect x="73" y="140" width="45" height="14" rx="1" fill="#1a2540" stroke="#4a9eff" stroke-width="0.3" opacity=".5"/>
+            <text x="95" y="150" text-anchor="middle" font-family="'Courier New'" font-size="4" fill="#4a9eff">Editorial</text>
+            <text x="70" y="165" text-anchor="middle" font-family="'Courier New'" font-size="4" fill="rgba(74,158,255,.3)" letter-spacing="2">VEXA STUDIO — 2024</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Marca · Presentación Corporativa</p>
+        <h3 class="project-name">Vexa Studio — Deck Creativo</h3>
+        <p class="project-desc">Presentación corporativa de 18 diapositivas para estudio tech. Diseño de portada, slides de equipo, gráficos de resultados y propuesta de servicios.</p>
+      </div>
+    </div>
+
+    <!-- 4. FLYER RESTAURANTE menú digital redes -->
+    <div class="project-card" data-cat="restaurante">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(135deg,#0a1a0d 0%,#1a3020 100%)">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Flyer menú tipo instagram post -->
+            <rect x="20" y="10" width="130" height="178" rx="3" fill="#0d1f10" stroke="#5caa6f" stroke-width="0.6" opacity=".7"/>
+            <!-- Header flyer -->
+            <rect x="20" y="10" width="130" height="50" rx="3" fill="#1a3520"/>
+            <ellipse cx="85" cy="35" rx="30" ry="18" fill="none" stroke="#5caa6f" stroke-width="0.5" opacity=".3"/>
+            <text x="85" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="14" fill="#7dd490" font-style="italic">Nativo</text>
+            <text x="85" y="44" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="rgba(93,200,117,.5)" letter-spacing="4">COCINA LOCAL</text>
+            <!-- Platos del día -->
+            <text x="85" y="72" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="#5caa6f" letter-spacing="3">ESPECIAL DEL DÍA</text>
+            <line x1="30" y1="76" x2="140" y2="76" stroke="#5caa6f" stroke-width="0.3" opacity=".4"/>
+            <!-- Ítem 1 -->
+            <rect x="30" y="82" width="110" height="28" rx="1" fill="rgba(92,170,111,.05)" stroke="#5caa6f" stroke-width="0.3" opacity=".3"/>
+            <text x="36" y="95" font-family="Georgia,serif" font-size="6.5" fill="#c8e8c8" font-style="italic">Bandeja típica de la casa</text>
+            <text x="36" y="105" font-family="Georgia,serif" font-size="5" fill="rgba(93,200,117,.5)">Fríjoles · Chicharrón · Arroz</text>
+            <text x="133" y="95" text-anchor="end" font-family="Georgia,serif" font-size="7" fill="#7dd490">$28k</text>
+            <!-- Ítem 2 -->
+            <rect x="30" y="116" width="110" height="28" rx="1" fill="rgba(92,170,111,.05)" stroke="#5caa6f" stroke-width="0.3" opacity=".3"/>
+            <text x="36" y="129" font-family="Georgia,serif" font-size="6.5" fill="#c8e8c8" font-style="italic">Cazuela de mariscos</text>
+            <text x="36" y="139" font-family="Georgia,serif" font-size="5" fill="rgba(93,200,117,.5)">Camarones · Calamar · Coco</text>
+            <text x="133" y="129" text-anchor="end" font-family="Georgia,serif" font-size="7" fill="#7dd490">$35k</text>
+            <!-- Ítem 3 -->
+            <rect x="30" y="150" width="110" height="28" rx="1" fill="rgba(92,170,111,.05)" stroke="#5caa6f" stroke-width="0.3" opacity=".3"/>
+            <text x="36" y="163" font-family="Georgia,serif" font-size="6.5" fill="#c8e8c8" font-style="italic">Sancocho trifásico</text>
+            <text x="36" y="173" font-family="Georgia,serif" font-size="5" fill="rgba(93,200,117,.5)">Gallina · Res · Cerdo · Yuca</text>
+            <text x="133" y="163" text-anchor="end" font-family="Georgia,serif" font-size="7" fill="#7dd490">$25k</text>
+            <text x="85" y="186" text-anchor="middle" font-family="Georgia,serif" font-size="4.5" fill="rgba(92,170,111,.35)" letter-spacing="2">@nativocorina · Cali, Colombia</text>
+            <!-- Panel lateral -->
+            <text x="168" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#5caa6f" opacity=".7" transform="rotate(-90 168 80)">MENÚ DEL DÍA</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Restaurante · Flyer Menú del Día</p>
+        <h3 class="project-name">Nativo — Especial del Día</h3>
+        <p class="project-desc">Flyer digital para publicación diaria en redes sociales. Formato Instagram feed con platos del día, precios y branding integrado.</p>
+      </div>
+    </div>
+
+    <!-- 5. BRANDING COMPLETO marca - FEATURED -->
+    <div class="project-card featured" data-cat="marca">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(135deg,#1a1508 0%,#2d2510 100%)">
+          <svg width="560" height="260" viewBox="0 0 560 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Branding completo: logo + aplicaciones -->
+            <!-- Logo principal -->
+            <rect x="20" y="20" width="160" height="100" rx="2" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.5" opacity=".5"/>
+            <polygon points="100,38 118,68 140,68 122,84 130,114 100,96 70,114 78,84 60,68 82,68" fill="none" stroke="#d4b07a" stroke-width="0.8" opacity=".6"/>
+            <text x="100" y="80" text-anchor="middle" font-family="Georgia,serif" font-size="13" fill="#d4b07a" letter-spacing="2">AURUM</text>
+            <text x="100" y="108" text-anchor="middle" font-family="Georgia,serif" font-size="4.5" fill="#8a6e3e" letter-spacing="5">JOYERÍA ARTESANAL</text>
+            <!-- Tarjeta de presentación -->
+            <rect x="200" y="20" width="160" height="90" rx="2" fill="#d4b07a"/>
+            <rect x="200" y="20" width="160" height="90" rx="2" fill="none" stroke="#8a6e3e" stroke-width="0.5"/>
+            <text x="218" y="48" font-family="Georgia,serif" font-size="12" fill="#1e1a0a" font-style="italic" letter-spacing="1">Aurum</text>
+            <text x="218" y="60" font-family="Georgia,serif" font-size="5" fill="#5a4020" letter-spacing="3">JOYERÍA</text>
+            <line x1="218" y1="65" x2="290" y2="65" stroke="#8a6e3e" stroke-width="0.4"/>
+            <text x="218" y="75" font-family="Georgia,serif" font-size="5" fill="#3a2a10">Valentina Ospina — Fundadora</text>
+            <text x="218" y="85" font-family="Georgia,serif" font-size="5" fill="#5a4020">+57 310 000 0000</text>
+            <text x="218" y="97" font-family="Georgia,serif" font-size="4.5" fill="#5a4020">@aurumjoyeria</text>
+            <!-- Reverso tarjeta -->
+            <rect x="380" y="20" width="160" height="90" rx="2" fill="#1e1a0a"/>
+            <polygon points="460,35 472,57 488,57 474,68 479,90 460,77 441,90 446,68 432,57 448,57" fill="none" stroke="#d4b07a" stroke-width="0.8" opacity=".4"/>
+            <text x="460" y="64" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#d4b07a" font-style="italic">A</text>
+            <!-- Packaging / bolsa -->
+            <rect x="20" y="138" width="100" height="100" rx="2" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.5" opacity=".4"/>
+            <rect x="40" y="158" width="60" height="65" rx="1" fill="#d4b07a" opacity=".08" stroke="#d4b07a" stroke-width="0.5" opacity=".4"/>
+            <text x="70" y="192" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#d4b07a" font-style="italic">A</text>
+            <text x="70" y="204" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="#8a6e3e" letter-spacing="2">AURUM</text>
+            <line x1="55" y1="158" x2="55" y2="148" stroke="#d4b07a" stroke-width="0.6" opacity=".5"/>
+            <line x1="85" y1="158" x2="85" y2="148" stroke="#d4b07a" stroke-width="0.6" opacity=".5"/>
+            <line x1="52" y1="148" x2="88" y2="148" stroke="#d4b07a" stroke-width="0.6" opacity=".5"/>
+            <!-- Etiqueta -->
+            <rect x="140" y="138" width="90" height="55" rx="1" fill="#d4b07a"/>
+            <rect x="148" y="146" width="74" height="40" rx="1" fill="none" stroke="#8a6e3e" stroke-width="0.4"/>
+            <text x="185" y="163" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#1e1a0a" font-style="italic">Aurum</text>
+            <text x="185" y="174" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="#5a4020" letter-spacing="3">JOYERÍA</text>
+            <text x="185" y="183" text-anchor="middle" font-family="Georgia,serif" font-size="3.5" fill="#8a6e3e">Hecho a mano con amor</text>
+            <!-- Post redes -->
+            <rect x="250" y="138" width="90" height="90" rx="2" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.5" opacity=".4"/>
+            <rect x="250" y="138" width="90" height="30" rx="2" fill="#d4b07a" opacity=".08"/>
+            <text x="295" y="157" text-anchor="middle" font-family="Georgia,serif" font-size="7" fill="#d4b07a" font-style="italic">Nueva colección</text>
+            <text x="295" y="167" text-anchor="middle" font-family="Georgia,serif" font-size="4.5" fill="#8a6e3e" letter-spacing="1">TEMPORADA 2024</text>
+            <ellipse cx="295" cy="196" rx="24" ry="14" fill="none" stroke="#d4b07a" stroke-width="0.5" opacity=".3"/>
+            <text x="295" y="200" text-anchor="middle" font-family="Georgia,serif" font-size="10" fill="#d4b07a" font-style="italic">A</text>
+            <text x="295" y="222" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="#6a5030" letter-spacing="2">@aurumjoyeria</text>
+            <!-- Guía colores -->
+            <rect x="360" y="138" width="180" height="30" rx="2" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.4" opacity=".3"/>
+            <text x="368" y="150" font-family="Georgia,serif" font-size="4.5" fill="#8a6e3e" letter-spacing="2">PALETA CROMÁTICA</text>
+            <rect x="368" y="155" width="20" height="8" rx="1" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.3"/>
+            <rect x="394" y="155" width="20" height="8" rx="1" fill="#d4b07a"/>
+            <rect x="420" y="155" width="20" height="8" rx="1" fill="#f5e8c0"/>
+            <rect x="446" y="155" width="20" height="8" rx="1" fill="#8a6e3e"/>
+            <rect x="472" y="155" width="20" height="8" rx="1" fill="#3a2a10"/>
+            <!-- Tipografía -->
+            <rect x="360" y="178" width="180" height="48" rx="2" fill="#1e1a0a" stroke="#d4b07a" stroke-width="0.4" opacity=".3"/>
+            <text x="368" y="192" font-family="Georgia,serif" font-size="4.5" fill="#8a6e3e" letter-spacing="2">SISTEMA TIPOGRÁFICO</text>
+            <text x="368" y="206" font-family="Georgia,serif" font-size="11" fill="#d4b07a" font-style="italic">Playfair Display</text>
+            <text x="368" y="219" font-family="'Courier New'" font-size="6" fill="rgba(212,176,122,.4)" letter-spacing="1">DM Sans — cuerpo de texto</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Marca · Branding Completo</p>
+        <h3 class="project-name">Aurum Joyería — Sistema de Marca</h3>
+        <p class="project-desc">Branding integral para joyería artesanal: logotipo, tarjetas de presentación, packaging premium, etiquetas, plantillas para redes y guía de estilo completa.</p>
+      </div>
+    </div>
+
+    <!-- 6. PRESENTACIÓN - Influencer -->
+    <div class="project-card" data-cat="influencer">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(160deg,#1a0a0a 0%,#3a1010 60%,#1a0505 100%)">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Media kit / presentación influencer -->
+            <rect x="10" y="10" width="200" height="60" rx="2" fill="#220808" stroke="#c04040" stroke-width="0.5" opacity=".5"/>
+            <text x="110" y="32" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#d06060" font-style="italic" letter-spacing="4">Julián</text>
+            <text x="110" y="45" text-anchor="middle" font-family="Georgia,serif" font-size="6" fill="rgba(200,80,80,.5)" letter-spacing="6">MONTOYA</text>
+            <text x="110" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="4.5" fill="rgba(200,80,80,.3)" letter-spacing="3">FITNESS · WELLNESS · VIDA</text>
+            <!-- Métricas -->
+            <rect x="10" y="80" width="60" height="40" rx="2" fill="#220808" stroke="#c04040" stroke-width="0.4" opacity=".4"/>
+            <text x="40" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#d06060" font-style="italic">500K</text>
+            <text x="40" y="108" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(200,80,80,.4)" letter-spacing="2">SEGUIDORES</text>
+            <rect x="80" y="80" width="60" height="40" rx="2" fill="#220808" stroke="#c04040" stroke-width="0.4" opacity=".4"/>
+            <text x="110" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#d06060" font-style="italic">8.4%</text>
+            <text x="110" y="108" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(200,80,80,.4)" letter-spacing="2">ENGAGEMENT</text>
+            <rect x="150" y="80" width="60" height="40" rx="2" fill="#220808" stroke="#c04040" stroke-width="0.4" opacity=".4"/>
+            <text x="180" y="96" text-anchor="middle" font-family="Georgia,serif" font-size="12" fill="#d06060" font-style="italic">2.1M</text>
+            <text x="180" y="108" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(200,80,80,.4)" letter-spacing="2">ALCANCE MENS.</text>
+            <!-- Servicios collab -->
+            <rect x="10" y="130" width="200" height="58" rx="2" fill="#220808" stroke="#c04040" stroke-width="0.4" opacity=".3"/>
+            <text x="110" y="144" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="rgba(200,80,80,.5)" letter-spacing="3">COLABORACIONES</text>
+            <line x1="20" y1="148" x2="200" y2="148" stroke="#c04040" stroke-width="0.3" opacity=".3"/>
+            <text x="20" y="160" font-family="Georgia,serif" font-size="5.5" fill="#d4a0a0">· Reseñas de producto fitness</text>
+            <text x="20" y="171" font-family="Georgia,serif" font-size="5.5" fill="#d4a0a0">· Contenido patrocinado (feed + stories)</text>
+            <text x="20" y="182" font-family="Georgia,serif" font-size="5.5" fill="#d4a0a0">· Embajador de marca long-term</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Influencer · Media Kit</p>
+        <h3 class="project-name">Julián Montoya — Press Kit</h3>
+        <p class="project-desc">Media kit profesional para presentar a marcas: estadísticas de audiencia, tipos de colaboración, tarifas y casos de éxito. Formato PDF e impreso.</p>
+      </div>
+    </div>
+
+    <!-- 7. FLYER MENÚ COCTELERÍA (restaurante) -->
+    <div class="project-card" data-cat="restaurante">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(135deg,#0a0a1a 0%,#181830 100%)">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Flyer menú coctelería tipo carta nocturna -->
+            <rect x="15" y="8" width="140" height="182" rx="2" fill="#0d0d20" stroke="#8888dd" stroke-width="0.5" opacity=".6"/>
+            <rect x="23" y="16" width="124" height="166" rx="1" fill="none" stroke="#8888dd" stroke-width="0.2" opacity=".3"/>
+            <!-- Header -->
+            <circle cx="85" cy="42" r="22" fill="none" stroke="#8888dd" stroke-width="0.5" opacity=".3"/>
+            <text x="85" y="38" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#aaaaee" font-style="italic">Luna</text>
+            <text x="85" y="52" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="rgba(150,150,220,.5)" letter-spacing="4">COCTELERÍA</text>
+            <line x1="30" y1="68" x2="140" y2="68" stroke="#8888dd" stroke-width="0.3" opacity=".4"/>
+            <!-- Cócteles -->
+            <text x="30" y="80" font-family="Georgia,serif" font-size="5.5" fill="#8888dd" letter-spacing="3">FIRMA DE LA CASA</text>
+            <text x="30" y="93" font-family="Georgia,serif" font-size="6" fill="#d0d0f0" font-style="italic">Luna Llena</text>
+            <text x="30" y="102" font-family="Georgia,serif" font-size="4.5" fill="rgba(150,150,220,.4)">Ron · Coco · Maracuyá · Hielo seco</text>
+            <text x="138" y="93" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#aaaaee">$28k</text>
+            <text x="30" y="114" font-family="Georgia,serif" font-size="6" fill="#d0d0f0" font-style="italic">Eclipse Oscuro</text>
+            <text x="30" y="123" font-family="Georgia,serif" font-size="4.5" fill="rgba(150,150,220,.4)">Whisky · Amaretto · Espresso</text>
+            <text x="138" y="114" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#aaaaee">$32k</text>
+            <text x="30" y="135" font-family="Georgia,serif" font-size="6" fill="#d0d0f0" font-style="italic">Medianoche Rosa</text>
+            <text x="30" y="144" font-family="Georgia,serif" font-size="4.5" fill="rgba(150,150,220,.4)">Ginebra · Rosas · Limón · Tónica</text>
+            <text x="138" y="135" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#aaaaee">$26k</text>
+            <line x1="30" y1="152" x2="140" y2="152" stroke="#8888dd" stroke-width="0.3" opacity=".3"/>
+            <text x="30" y="162" font-family="Georgia,serif" font-size="5.5" fill="#8888dd" letter-spacing="3">MOCKTAILS</text>
+            <text x="30" y="174" font-family="Georgia,serif" font-size="6" fill="#d0d0f0" font-style="italic">Noche Estrellada</text>
+            <text x="138" y="174" text-anchor="end" font-family="Georgia,serif" font-size="6" fill="#aaaaee">$18k</text>
+            <text x="85" y="186" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(130,130,200,.35)" letter-spacing="2">@lunacocteleria</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Restaurante · Carta de Cócteles</p>
+        <h3 class="project-name">Luna — Menú de Coctelería</h3>
+        <p class="project-desc">Carta de cócteles de autor para bar nocturno. Diseño editorial oscuro y elegante con versión impresa y digital para redes.</p>
+      </div>
+    </div>
+
+    <!-- 8. PRESENTACIÓN MARCA -->
+    <div class="project-card" data-cat="marca">
+      <div class="project-thumb">
+        <div class="project-bg" style="background:linear-gradient(135deg,#0d1a14 0%,#1a3025 100%)">
+          <svg width="220" height="200" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Presentación de marca ecológica -->
+            <rect x="10" y="10" width="200" height="55" rx="2" fill="#0d2015" stroke="#5abf8f" stroke-width="0.5" opacity=".5"/>
+            <text x="110" y="30" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#7dd4a8" font-style="italic" letter-spacing="2">EcoMarca</text>
+            <text x="110" y="43" text-anchor="middle" font-family="Georgia,serif" font-size="5" fill="rgba(90,191,143,.4)" letter-spacing="3">PRESENTACIÓN DE MARCA</text>
+            <text x="110" y="55" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(90,191,143,.25)" letter-spacing="2">PROPÓSITO · VALORES · IDENTIDAD</text>
+            <!-- Valores -->
+            <rect x="10" y="75" width="58" height="55" rx="2" fill="#0d2015" stroke="#5abf8f" stroke-width="0.4" opacity=".4"/>
+            <text x="39" y="94" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#5abf8f" opacity=".4">🌿</text>
+            <text x="39" y="110" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#7dd4a8">Sostenible</text>
+            <text x="39" y="121" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(90,191,143,.35)">100% orgánico</text>
+            <rect x="81" y="75" width="58" height="55" rx="2" fill="#0d2015" stroke="#5abf8f" stroke-width="0.4" opacity=".4"/>
+            <text x="110" y="94" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#5abf8f" opacity=".4">♻</text>
+            <text x="110" y="110" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#7dd4a8">Circular</text>
+            <text x="110" y="121" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(90,191,143,.35)">Zero residuos</text>
+            <rect x="152" y="75" width="58" height="55" rx="2" fill="#0d2015" stroke="#5abf8f" stroke-width="0.4" opacity=".4"/>
+            <text x="181" y="94" text-anchor="middle" font-family="Georgia,serif" font-size="16" fill="#5abf8f" opacity=".4">◎</text>
+            <text x="181" y="110" text-anchor="middle" font-family="Georgia,serif" font-size="5.5" fill="#7dd4a8">Transparente</text>
+            <text x="181" y="121" text-anchor="middle" font-family="Georgia,serif" font-size="4" fill="rgba(90,191,143,.35)">Trazabilidad</text>
+            <!-- Tipografía y sistema -->
+            <rect x="10" y="140" width="200" height="48" rx="2" fill="#0d2015" stroke="#5abf8f" stroke-width="0.4" opacity=".3"/>
+            <text x="18" y="154" font-family="Georgia,serif" font-size="4.5" fill="rgba(90,191,143,.4)" letter-spacing="2">SISTEMA DE MARCA</text>
+            <text x="18" y="168" font-family="Georgia,serif" font-size="12" fill="#7dd4a8" font-style="italic">EcoMarca</text>
+            <rect x="100" y="152" width="14" height="14" rx="7" fill="#5abf8f" opacity=".8"/>
+            <rect x="118" y="152" width="14" height="14" rx="7" fill="#2d6b4a"/>
+            <rect x="136" y="152" width="14" height="14" rx="7" fill="#a8e0c4"/>
+            <rect x="154" y="152" width="14" height="14" rx="7" fill="#1a3025"/>
+            <text x="18" y="182" font-family="'Courier New'" font-size="5.5" fill="rgba(90,191,143,.35)" letter-spacing="1">DM Sans — tipografía base</text>
+          </svg>
+        </div>
+        <div class="project-overlay"></div>
+        <div class="project-arrow">→</div>
+      </div>
+      <div class="project-meta">
+        <p class="project-cat">Marca · Presentación de Identidad</p>
+        <h3 class="project-name">EcoMarca — Brand Presentation</h3>
+        <p class="project-desc">Presentación de identidad para marca sostenible. Propósito, valores, sistema cromático, tipografía y lineamientos de uso en 20 slides.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <p class="section-label fade-up">Servicios</p>
+  <h2 class="section-title fade-up" style="color:var(--paper)">Lo que puedo <em>hacer</em><br>por tu marca</h2>
+  <div class="services-grid">
+    <div class="service-item fade-up">
+      <div class="service-num">01</div>
+      <h3 class="service-name">Identidad Visual & Branding</h3>
+      <p class="service-desc">Creación de identidades visuales memorables desde cero. Logotipo, paleta cromática, tipografías, sistema de marca y manual de uso completo.</p>
+      <div class="service-tags">
+        <span class="service-tag">Logo</span>
+        <span class="service-tag">Manual</span>
+        <span class="service-tag">Sistema</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <div class="service-num">02</div>
+      <h3 class="service-name">Branding para Restaurantes</h3>
+      <p class="service-desc">Diseño integral para negocios gastronómicos: identidad, menús, packaging, señalética, uniformes y presencia digital coherente.</p>
+      <div class="service-tags">
+        <span class="service-tag">Menú</span>
+        <span class="service-tag">Packaging</span>
+        <span class="service-tag">Señalética</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <div class="service-num">03</div>
+      <h3 class="service-name">Marca Personal para Influencers</h3>
+      <p class="service-desc">Construyo la identidad visual que necesitas para diferenciarte: kit de medios, templates para redes, guía de estilo y dirección de contenidos.</p>
+      <div class="service-tags">
+        <span class="service-tag">Templates</span>
+        <span class="service-tag">Press Kit</span>
+        <span class="service-tag">Estilo</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <div class="service-num">04</div>
+      <h3 class="service-name">Diseño para Redes Sociales</h3>
+      <p class="service-desc">Sistemas visuales consistentes para Instagram, TikTok y LinkedIn. Templates editables, feeds cohesionados y contenido que detiene el scroll.</p>
+      <div class="service-tags">
+        <span class="service-tag">Instagram</span>
+        <span class="service-tag">TikTok</span>
+        <span class="service-tag">Feed</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <div class="service-num">05</div>
+      <h3 class="service-name">Diseño Editorial & Print</h3>
+      <p class="service-desc">Catálogos, revistas, libros y materiales impresos de alta calidad. Desde la maquetación hasta la supervisión de producción.</p>
+      <div class="service-tags">
+        <span class="service-tag">Catálogo</span>
+        <span class="service-tag">Revista</span>
+        <span class="service-tag">Print</span>
+      </div>
+    </div>
+    <div class="service-item fade-up">
+      <div class="service-num">06</div>
+      <h3 class="service-name">Consultoría de Marca</h3>
+      <p class="service-desc">Análisis y diagnóstico de tu identidad actual. Estrategia de posicionamiento visual, auditoría de consistencia y hoja de ruta para evolucionar tu marca.</p>
+      <div class="service-tags">
+        <span class="service-tag">Auditoría</span>
+        <span class="service-tag">Estrategia</span>
+        <span class="service-tag">Roadmap</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <p class="section-label fade-up">Proceso</p>
+  <h2 class="section-title fade-up">Así trabajo <em>contigo</em></h2>
+  <div class="process-steps">
+    <div class="process-step fade-up">
+      <div class="step-num">01</div>
+      <h3 class="step-title">Descubrimiento</h3>
+      <p class="step-desc">Entiendo tu negocio, audiencia, competencia y objetivos a fondo antes de diseñar una sola línea.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">02</div>
+      <h3 class="step-title">Concepto</h3>
+      <p class="step-desc">Desarrollo 2–3 direcciones creativas con moodboards, referencias y justificación estratégica.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">03</div>
+      <h3 class="step-title">Diseño</h3>
+      <p class="step-desc">Refinamiento iterativo con tu feedback. Máximo 3 rondas de revisión incluidas en cada proyecto.</p>
+    </div>
+    <div class="process-step fade-up">
+      <div class="step-num">04</div>
+      <h3 class="step-title">Entrega</h3>
+      <p class="step-desc">Archivos maestros en todos los formatos, manual de uso y soporte post-entrega por 30 días.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <p class="section-label fade-up">Testimonios</p>
+  <h2 class="section-title fade-up">Lo que dicen mis <em>clientes</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Camilo transformó completamente la imagen de nuestro restaurante. La nueva identidad habla exactamente del tipo de experiencia que queremos dar. Los clientes llegan ya enamorados de la marca antes de probar un plato.</p>
+      <div class="testimonial-author">
+        <strong>Carlos Mendoza</strong>
+        <span>Chef propietario · Sazón Restaurante, Bogotá</span>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Trabajar con Camilo fue lo mejor que pude hacer para mi marca personal. En dos semanas tenía una identidad que realmente me representaba y desde entonces mis colaboraciones con marcas se triplicaron.</p>
+      <div class="testimonial-author">
+        <strong>Valentina Ríos</strong>
+        <span>Creadora de contenido lifestyle · 280K seguidores</span>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">La consultoría de marca que hicimos con Camilo nos dio claridad total sobre cómo debíamos comunicarnos. El nuevo sistema visual le dio a Vexa Studio la credibilidad que necesitábamos para entrar al mercado corporativo.</p>
+      <div class="testimonial-author">
+        <strong>Diego Fernández</strong>
+        <span>CEO · Vexa Studio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <p class="section-label fade-up">Contacto</p>
+  <h2 class="section-title fade-up">Hablemos de tu <em>proyecto</em></h2>
+  <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <p>Estoy disponible para proyectos de identidad visual, branding y diseño editorial. Si tienes una marca que quieres llevar al siguiente nivel, escríbeme.</p>
+      <div class="contact-links">
+        <a href="mailto:educam623@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <span>educam623@gmail.com</span>
+          <span style="margin-left:auto;color:var(--gold)">→</span>
+        </a>
+        <a href="https://wa.me/573113272750" class="contact-link">
+          <span class="contact-link-icon">📱</span>
+          <span>WhatsApp · +57 311 327 2750</span>
+          <span style="margin-left:auto;color:var(--gold)">→</span>
+        </a>
+        <a href="https://instagram.com/camilohurtadodesign" class="contact-link">
+          <span class="contact-link-icon">◈</span>
+          <span>@camilohurtadodesign</span>
+          <span style="margin-left:auto;color:var(--gold)">→</span>
+        </a>
+        <a href="https://www.behance.net/camilohurtado" class="contact-link">
+          <span class="contact-link-icon">Be</span>
+          <span>Behance · camilohurtado</span>
+          <span style="margin-left:auto;color:var(--gold)">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-form-wrap fade-up">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tipo de proyecto</label>
+        <select>
+          <option value="" disabled selected>Selecciona un servicio</option>
+          <option>Identidad Visual & Branding</option>
+          <option>Branding para Restaurante</option>
+          <option>Marca Personal (Influencer)</option>
+          <option>Diseño para Redes Sociales</option>
+          <option>Diseño Editorial & Print</option>
+          <option>Consultoría de Marca</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Cuéntame sobre tu proyecto</label>
+        <textarea placeholder="¿Qué tienes en mente? ¿Cuál es tu presupuesto aproximado y tiempos?"></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit(this)">Enviar mensaje →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Camilo <span>Hurtado</span></div>
+  <p class="footer-copy">© 2025 Camilo Hurtado · Todos los derechos reservados</p>
+  <div class="footer-links">
+    <a href="#portfolio">Portafolio</a>
+    <a href="#services">Servicios</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
+  setTimeout(()=>{ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';},60);
+});
+document.querySelectorAll('a,button,.project-card,.filter').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='16px';cursor.style.height='16px';ring.style.width='54px';ring.style.height='54px';ring.style.opacity='.8'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.5'});
+});
+
+// Scroll fade-up
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:.15});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+// Portfolio filter
+function filterProjects(cat,btn){
+  document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card=>{
+    const cardCat=card.dataset.cat;
+    const show=cat==='all'||cardCat===cat;
+    card.style.transition='opacity .4s,transform .4s';
+    if(show){card.style.opacity='1';card.style.transform='scale(1)';card.style.display='block';}
+    else{card.style.opacity='0';card.style.transform='scale(.96)';setTimeout(()=>{if(!show)card.style.display='none';},400);}
+  });
+  // Handle featured spans
+  document.querySelectorAll('.featured').forEach(card=>{
+    if(cat==='all'&&card.style.display!=='none'){card.classList.add('featured');}
+    else{card.classList.remove('featured');}
+  });
+}
+
+// Form submit
+function handleSubmit(btn){
+  const orig=btn.textContent;
+  btn.textContent='✓ Mensaje enviado';
+  btn.style.background='var(--gold)';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';},3000);
+}
+
+// Nav scroll effect
+window.addEventListener('scroll',()=>{
+  const nav=document.querySelector('nav');
+  nav.style.boxShadow=window.scrollY>50?'0 1px 20px rgba(0,0,0,0.08)':'none';
+});
+</script>
+</body>
+</html>
